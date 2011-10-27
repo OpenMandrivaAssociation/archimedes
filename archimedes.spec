@@ -6,8 +6,8 @@ License:	GPLv3+
 Group:		Sciences/Physics
 URL:		http://www.gnu.org/software/archimedes/
 Source0:	ftp://ftp.gnu.org/gnu/archimedes/%{name}-%{version}.tar.bz2
-
-BuildRequires:	ghostscript-dvipdf
+BuildRequires:	dos2unix
+BuildRequires:	ghostscript
 BuildRequires:	tetex-latex
 
 %description
@@ -23,26 +23,27 @@ simulation of quite general semiconductor devices.
 %prep
 %setup -q
 
+# Suppress rpmlint error.
+dos2unix COPYING
+
 %build
-%configure --enable-manual
-%make
+%configure --enable-manual --bindir=%{_bindir} --libdir=%{_libdir}
+make %{?_smp_mflags}
 
 %install
-rm -rf %{buildroot}
+rm -rf $RPM_BUILD_ROOT
 
-%makeinstall_std INSTALL="%{__install} -p"
+make install INSTALL="%{__install} -p" DESTDIR=$RPM_BUILD_ROOT
 
 %clean
-rm -rf %{buildroot}
+rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(-,root,root,-)
 %doc AUTHORS
 %doc ChangeLog
+%doc COPYING
 %doc NEWS
 %doc README
 %doc THANKS
-%doc doc/%{name}.dvi
-%doc doc/%{name}.pdf
-%doc doc/%{name}.ps
 %{_bindir}/%{name}
