@@ -1,13 +1,14 @@
 Summary:	2D Quantum Monte Carlo simulator for semiconductor devices
 Name:		archimedes
 Version:	2.0.0
-Release:	%mkrel 1
+Release:	%mkrel 2
 License:	GPLv3+
 Group:		Sciences/Physics
 URL:		http://www.gnu.org/software/archimedes/
 Source0:	ftp://ftp.gnu.org/gnu/archimedes/%{name}-%{version}.tar.bz2
-BuildRequires:	dos2unix
+
 BuildRequires:	ghostscript
+BuildRequires:	ghostscript-dvipdf
 BuildRequires:	tetex-latex
 
 %description
@@ -23,27 +24,26 @@ simulation of quite general semiconductor devices.
 %prep
 %setup -q
 
-# Suppress rpmlint error.
-dos2unix COPYING
-
 %build
-%configure --enable-manual --bindir=%{_bindir} --libdir=%{_libdir}
-make %{?_smp_mflags}
+%configure --enable-manual
+%make
 
 %install
-rm -rf $RPM_BUILD_ROOT
+rm -rf %{buildroot}
 
-make install INSTALL="%{__install} -p" DESTDIR=$RPM_BUILD_ROOT
+%makeinstall_std INSTALL="%{__install} -p"
 
 %clean
-rm -rf $RPM_BUILD_ROOT
+rm -rf %{buildroot}
 
 %files
 %defattr(-,root,root,-)
 %doc AUTHORS
 %doc ChangeLog
-%doc COPYING
 %doc NEWS
 %doc README
 %doc THANKS
+%doc doc/%{name}.dvi
+%doc doc/%{name}.pdf
+%doc doc/%{name}.ps
 %{_bindir}/%{name}
