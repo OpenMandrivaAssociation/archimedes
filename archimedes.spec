@@ -7,7 +7,9 @@ Group:		Sciences/Physics
 URL:		http://www.gnu.org/software/archimedes/
 Source0:	ftp://ftp.gnu.org/gnu/archimedes/%{name}-%{version}.tar.bz2
 
-BuildRequires:	libgs-devel		# remove this line if bug #64627 fixed
+# remove the following line if bug #64627 fixed
+BuildRequires:	libgs-devel
+
 BuildRequires:	ghostscript-dvipdf
 BuildRequires:	tetex-latex
 
