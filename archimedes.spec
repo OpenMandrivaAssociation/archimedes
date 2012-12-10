@@ -1,16 +1,13 @@
 Summary:	2D Quantum Monte Carlo simulator for semiconductor devices
 Name:		archimedes
 Version:	2.0.0
-Release:	%mkrel 2
+Release:	%mkrel 1
 License:	GPLv3+
 Group:		Sciences/Physics
 URL:		http://www.gnu.org/software/archimedes/
 Source0:	ftp://ftp.gnu.org/gnu/archimedes/%{name}-%{version}.tar.bz2
-
-# remove the following line if bug #64627 fixed
-BuildRequires:	libgs-devel
-
-BuildRequires:	ghostscript-dvipdf
+BuildRequires:	dos2unix
+BuildRequires:	ghostscript
 BuildRequires:	tetex-latex
 
 %description
@@ -26,26 +23,37 @@ simulation of quite general semiconductor devices.
 %prep
 %setup -q
 
+# Suppress rpmlint error.
+dos2unix COPYING
+
 %build
-%configure --enable-manual
-%make
+%configure --enable-manual --bindir=%{_bindir} --libdir=%{_libdir}
+make %{?_smp_mflags}
 
 %install
-rm -rf %{buildroot}
+rm -rf $RPM_BUILD_ROOT
 
-%makeinstall_std INSTALL="%{__install} -p"
+make install INSTALL="%{__install} -p" DESTDIR=$RPM_BUILD_ROOT
 
 %clean
-rm -rf %{buildroot}
+rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(-,root,root,-)
 %doc AUTHORS
 %doc ChangeLog
+%doc COPYING
 %doc NEWS
 %doc README
 %doc THANKS
-%doc doc/%{name}.dvi
-%doc doc/%{name}.pdf
-%doc doc/%{name}.ps
 %{_bindir}/%{name}
+
+
+%changelog
+* Thu Oct 27 2011 Alexander Khrukin <akhrukin@mandriva.org> 2.0.0-1mdv2011.0
++ Revision: 707526
+- imported package archimedes
+
+  + Andrey Smirnov <asmirnov@mandriva.org>
+    - import archimedes
+
