@@ -1,11 +1,11 @@
 Summary:	2D Quantum Monte Carlo simulator for semiconductor devices
 Name:		archimedes
-Version:	2.0.0
-Release:	%mkrel 1
+Version:	2.0.1
+Release:	1
 License:	GPLv3+
 Group:		Sciences/Physics
 URL:		http://www.gnu.org/software/archimedes/
-Source0:	ftp://ftp.gnu.org/gnu/archimedes/%{name}-%{version}.tar.bz2
+Source0:	ftp://ftp.gnu.org:21/gnu/archimedes/%{name}-%{version}.tar.bz2
 BuildRequires:	dos2unix
 BuildRequires:	ghostscript
 BuildRequires:	tetex-latex
@@ -56,4 +56,5 @@ rm -rf $RPM_BUILD_ROOT
 
   + Andrey Smirnov <asmirnov@mandriva.org>
     - import archimedes
+
 
