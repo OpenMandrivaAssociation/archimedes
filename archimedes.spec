@@ -1,7 +1,7 @@
 Summary:	2D Quantum Monte Carlo simulator for semiconductor devices
 Name:		archimedes
 Version:	2.0.1
-Release:	1
+Release:	2
 License:	GPLv3+
 Group:		Sciences/Physics
 URL:		http://www.gnu.org/software/archimedes/
