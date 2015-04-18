@@ -1,7 +1,7 @@
 Summary:	2D Quantum Monte Carlo simulator for semiconductor devices
 Name:		archimedes
 Version:	2.0.1
-Release:	2
+Release:	3
 License:	GPLv3+
 Group:		Sciences/Physics
 URL:		http://www.gnu.org/software/archimedes/
@@ -9,6 +9,7 @@ Source0:	ftp://ftp.gnu.org:21/gnu/archimedes/%{name}-%{version}.tar.bz2
 BuildRequires:	dos2unix
 BuildRequires:	ghostscript
 BuildRequires:	tetex-latex
+BuildRequires:	gcc-c++, gcc, gcc-cpp
 
 %description
 Archimedes is a package for the design and simulation of submicron
@@ -27,34 +28,16 @@ simulation of quite general semiconductor devices.
 dos2unix COPYING
 
 %build
+export CC=gcc
+export CXX=g++
+
 %configure --enable-manual --bindir=%{_bindir} --libdir=%{_libdir}
-make %{?_smp_mflags}
+%make
 
 %install
-rm -rf $RPM_BUILD_ROOT
+make install INSTALL="%{__install} -p" DESTDIR=%{buildroot}
 
-make install INSTALL="%{__install} -p" DESTDIR=$RPM_BUILD_ROOT
-
-%clean
-rm -rf $RPM_BUILD_ROOT
 
 %files
-%defattr(-,root,root,-)
-%doc AUTHORS
-%doc ChangeLog
-%doc COPYING
-%doc NEWS
-%doc README
-%doc THANKS
+%doc AUTHORS ChangeLog COPYING NEWS README THANKS
 %{_bindir}/%{name}
-
-
-%changelog
-* Thu Oct 27 2011 Alexander Khrukin <akhrukin@mandriva.org> 2.0.0-1mdv2011.0
-+ Revision: 707526
-- imported package archimedes
-
-  + Andrey Smirnov <asmirnov@mandriva.org>
-    - import archimedes
-
-
