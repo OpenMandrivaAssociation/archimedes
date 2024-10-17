@@ -4,7 +4,7 @@ Version:	2.0.1
 Release:	3
 License:	GPLv3+
 Group:		Sciences/Physics
-URL:		http://www.gnu.org/software/archimedes/
+URL:		https://www.gnu.org/software/archimedes/
 Source0:	ftp://ftp.gnu.org:21/gnu/archimedes/%{name}-%{version}.tar.bz2
 BuildRequires:	dos2unix
 BuildRequires:	ghostscript
